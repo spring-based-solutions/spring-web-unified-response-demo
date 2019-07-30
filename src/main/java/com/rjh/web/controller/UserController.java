@@ -4,10 +4,13 @@ import com.rjh.web.entity.User;
 import com.rjh.web.exception.BaseException;
 import com.rjh.web.response.BaseResponse;
 import com.rjh.web.response.ResponseCode;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.Collection;
+import java.util.List;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * 测试用的Controller
@@ -19,20 +22,79 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("users")
 public class UserController {
+    /**
+     * 当前ID
+     */
+    private AtomicInteger currentId=new AtomicInteger(1);
+    /**
+     * 用户列表
+     */
+    private Map<Integer,User> users=new ConcurrentHashMap<>();
 
+    /**
+     * 根据用户ID获取用户
+     * @param userId 用户ID
+     * @return
+     */
     @GetMapping("/{userId}")
     public User getUserById(@PathVariable Integer userId){
-        if(userId.equals(0)){
+        if(users.containsKey(userId)){
+            return users.get(userId);
+        }else{
             throw new BaseException(ResponseCode.RESOURCES_NOT_EXIST);
         }
-        if(userId.equals(1)){
-            throw new RuntimeException();
-        }
-        User user=new User();
-        user.setId(userId);
-        user.setName("test");
+    }
+
+    /**
+     * 列出所有用户
+     * @return
+     */
+    @GetMapping
+    public Collection<User> listAllUsers(){
+        return users.values();
+    }
+
+    /**
+     * 新增用户
+     * @param user 用户实体
+     * @return
+     */
+    @PostMapping
+    public User addUser(@RequestBody User user){
+        user.setId(currentId.getAndIncrement());
+        users.put(user.getId(),user);
         return user;
     }
 
+    /**
+     * 更新用户信息
+     * @param userId
+     * @param user
+     * @return
+     */
+    @PutMapping("/{userId}")
+    public User updateUser(@PathVariable Integer userId,@RequestBody User user){
+        if(users.containsKey(userId)){
+           User newUser=users.get(userId);
+           newUser.setName(user.getName());
+           return newUser;
+        }else{
+            throw new BaseException(ResponseCode.RESOURCES_NOT_EXIST);
+        }
+    }
 
+    /**
+     * 删除用户
+     * @param userId 用户ID
+     * @return
+     */
+    @DeleteMapping("/{userId}")
+    public User deleteUserById(@PathVariable Integer userId){
+        User user=users.remove(userId);
+        if(user!=null){
+            return user;
+        }else{
+            throw new BaseException(ResponseCode.RESOURCES_NOT_EXIST);
+        }
+    }
 }
