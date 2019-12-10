@@ -2,23 +2,19 @@ package com.rjh.web.controller;
 
 import com.rjh.web.entity.User;
 import com.rjh.web.exception.BaseException;
-import com.rjh.web.response.BaseResponse;
 import com.rjh.web.response.ResponseCode;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collection;
-import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
- * 测试用的Controller
- *
+ * 演示用的Controller
  * @author NULL
  * @date 2019-07-16
  */
-@BaseResponse
 @RestController
 @RequestMapping("users")
 public class UserController {
@@ -97,4 +93,5 @@ public class UserController {
             throw new BaseException(ResponseCode.RESOURCES_NOT_EXIST);
         }
     }
+
 }
