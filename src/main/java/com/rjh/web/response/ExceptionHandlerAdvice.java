@@ -2,31 +2,21 @@ package com.rjh.web.response;
 
 import com.rjh.web.exception.BaseException;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 /**
  * 异常处理器
- *
  * @author NULL
  * @since  2019-07-16
  */
-@ControllerAdvice(annotations = BaseResponse.class)
+@ControllerAdvice(annotations = {RestController.class, Controller.class})
 @ResponseBody
 @Slf4j
 public class ExceptionHandlerAdvice {
-    /**
-     * 处理未捕获的Exception
-     * @param e 异常
-     * @return 统一响应体
-     */
-    @ExceptionHandler(Exception.class)
-    public ResponseResult handleException(Exception e){
-        log.error(e.getMessage(),e);
-        return new ResponseResult(ResponseCode.SERVICE_ERROR.getCode(),ResponseCode.SERVICE_ERROR.getMsg(),null);
-    }
-
     /**
      * 处理未捕获的RuntimeException
      * @param e 运行时异常
@@ -37,7 +27,6 @@ public class ExceptionHandlerAdvice {
         log.error(e.getMessage(),e);
         return new ResponseResult(ResponseCode.SERVICE_ERROR.getCode(),ResponseCode.SERVICE_ERROR.getMsg(),null);
     }
-
     /**
      * 处理业务异常BaseException
      * @param e 业务异常
