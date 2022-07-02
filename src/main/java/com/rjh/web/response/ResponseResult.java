@@ -1,5 +1,6 @@
 package com.rjh.web.response;
 
+import io.swagger.annotations.ApiModel;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -11,6 +12,7 @@ import java.io.Serializable;
  * @author NULL
  * @date 2019-07-16
  */
+@ApiModel("公共响应")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor

@@ -3,19 +3,15 @@ package com.rjh.web.response;
 import com.rjh.web.exception.BaseException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ControllerAdvice;
-import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * 异常处理器
  * @author NULL
  * @since  2019-07-16
  */
-@ControllerAdvice(annotations = {RestController.class, Controller.class})
-@ResponseBody
 @Slf4j
+@ControllerAdvice(basePackages = "com.rjh.web.controller")
 public class ExceptionHandlerAdvice {
     /**
      * 处理未捕获的RuntimeException
