@@ -29,6 +29,7 @@ public class SwaggerConfig {
         Contact contact = new Contact("统一响应示例","https://github.com/spring-based-solutions/spring-web-unified-response-demo","jiehui.ruan@qq.com");
         ApiInfo apiInfo = new ApiInfo("统一响应示例","统一响应示例","1.0","",
                 contact,"Apache 2.0","http://www.apache.org/licenses/LICENSE-2.0", Collections.emptyList());
+
         return new Docket(DocumentationType.SWAGGER_2)
                 .apiInfo(apiInfo)
                 .select()

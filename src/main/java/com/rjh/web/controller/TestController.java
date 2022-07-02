@@ -1,7 +1,6 @@
 package com.rjh.web.controller;
 
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.*;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -19,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class TestController {
 
     @ApiOperation("测试字符串返回")
+    @ApiParam(type = "path",example = "test",value = "测试字符串")
     @GetMapping("string/{str}")
     public String testString(@PathVariable String str){
         return str;
