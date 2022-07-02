@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
  * @since  2019-07-16
  */
 @Slf4j
+@ResponseBody
 @ControllerAdvice(basePackages = "com.rjh.web.controller")
 public class ExceptionHandlerAdvice {
     /**

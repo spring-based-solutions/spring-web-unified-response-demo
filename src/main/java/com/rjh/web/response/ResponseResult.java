@@ -1,6 +1,7 @@
 package com.rjh.web.response;
 
 import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -20,14 +21,17 @@ public class ResponseResult<T> implements Serializable {
     /**
      * 返回状态码
      */
+    @ApiModelProperty("返回状态码")
     private Integer code;
     /**
      * 返回信息
      */
+    @ApiModelProperty("返回信息")
     private String msg;
     /**
      * 数据
      */
+    @ApiModelProperty("数据")
     private T data;
 
 }
