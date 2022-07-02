@@ -23,8 +23,7 @@ public class ResponseResultHandlerAdvice implements ResponseBodyAdvice {
 
     @Override
     public boolean supports(MethodParameter returnType, Class converterType) {
-        log.info("returnType:"+returnType);
-        log.info("converterType:"+converterType);
+        log.info("returnType:{},converterType:{}",returnType,converterType);
         return true;
     }
 
@@ -35,7 +34,7 @@ public class ResponseResultHandlerAdvice implements ResponseBodyAdvice {
         // 处理状态码为2XX的响应
         if(httpStatus.is2xxSuccessful()){
             // 判断响应的Content-Type为JSON格式的body
-            if(MediaType.APPLICATION_JSON.equals(selectedContentType) || MediaType.APPLICATION_JSON_UTF8.equals(selectedContentType)){
+            if(MediaType.APPLICATION_JSON.equals(selectedContentType)){
                 if(body instanceof ResponseResult){ // 如果响应返回的对象为统一响应体，则直接返回body
                     return body;
                 }else{
