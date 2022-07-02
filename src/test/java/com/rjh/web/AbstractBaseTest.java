@@ -1,8 +1,8 @@
 package com.rjh.web;
 
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
@@ -17,6 +17,9 @@ public abstract class AbstractBaseTest {
     private WebApplicationContext context;
 
     protected MockMvc mockMvc;
+
+    @Resource
+    protected ObjectMapper objectMapper;
 
     @BeforeEach
     public void init(){
